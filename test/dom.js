@@ -113,7 +113,7 @@ describe('.empty()', function(){
   it('should empty the children of all the elements', function(){
     var list = dom('<div><p>Hello</p><h1>Hi</h1><p>Bye</p></div>');
     list.find('p').empty();
-    assert('<div><p></p><h1>Hi</h1><p></p></div>' == list.html());
+    assert('<p></p><h1>Hi</h1><p></p>' == list.html());
   })
 })
 
