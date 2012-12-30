@@ -196,6 +196,25 @@ List.prototype.remove = function(selector){
 };
 
 /**
+ * Removes all children of list elements.
+ *
+ * @return {List} self
+ * @api public
+ */
+
+List.prototype.empty = function(){
+  var elem;
+  for (var i = 0; i < this.els.length; ++i) {
+    elem = this.els[i];
+    // jQuery implementation
+		while ( elem.firstChild ) {
+			elem.removeChild( elem.firstChild );
+		}
+  }
+  return this;
+};
+
+/**
  * Return a `List` containing the element at `i`.
  *
  * @param {Number} i

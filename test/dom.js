@@ -103,6 +103,20 @@ describe('.remove()', function(){
   })
 })
 
+describe('.empty()', function(){
+  it('should return itself for chaining', function(){
+    var list = dom('<div><p>Hello</p></div>'),
+    sublist = list.find('p');
+    assert(sublist == sublist.empty());
+  })
+
+  it('should empty the children of all the elements', function(){
+    var list = dom('<div><p>Hello</p><h1>Hi</h1><p>Bye</p></div>');
+    list.find('p').empty();
+    assert('<div><p></p><h1>Hi</h1><p></p></div>' == list.html());
+  })
+})
+
 describe('.length()', function(){
   it('should return the number of elements', function(){
     var list = dom('<em>Hello</em>');
