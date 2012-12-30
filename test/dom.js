@@ -298,6 +298,25 @@ describe('.attr()', function(){
   })
 })
 
+describe('.val()', function(){
+  describe('with value', function(){
+    it('should set the attribute', function(){
+      var list = dom('<input value="old" /><a href="#" value="old">link</a>');
+      list.val('new');
+      assert('new' == list.get(0).value);
+      assert('new' == list.get(1).value);
+    })
+  })
+
+  describe('without value', function(){
+    it('should return the attribute', function(){
+      var list = dom('<input value="old" />');
+      assert('old' == list.val());
+    })
+  })
+})
+
+
 describe('.css()', function(){
   describe('with a key and value', function(){
     it('should set a style value', function(){

@@ -115,10 +115,33 @@ function List(els, selector) {
 
 List.prototype.attr = function(name, val){
   if (2 == arguments.length) {
-    this.els[0].setAttribute(name, val);
+    for (var i = 0, len = this.els.length; i < len; ++i) {
+      this.els[0].setAttribute(name, val);
+    }
     return this;
   } else {
+    if(this.els.length == 0) return null;
     return this.els[0].getAttribute(name);
+  }
+};
+
+/**
+ * Returns value of the first matched element or sets the value to each element
+ *
+ * @param {String} [val]
+ * @return {String|List} self
+ * @api public
+ */
+
+List.prototype.val = function(val){
+  if (1 == arguments.length) {
+    for (var i = 0, len = this.els.length; i < len; ++i) {
+      this.els[i].value = val;
+    }
+    return this;
+  } else {
+    if(this.els.length == 0) return null;
+    return this.els[0].value;
   }
 };
 
