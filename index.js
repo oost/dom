@@ -9,6 +9,7 @@ var domify = require('domify')
   , delegate = require('delegate')
   , events = require('event')
   , type = require('type')
+  , Sizzle = require('sizzle');
 
 /**
  * Attributes supported.
@@ -73,12 +74,12 @@ function dom(selector, context) {
 
   // html
   if ('<' == selector.charAt(0)) {
-    return new List([domify(selector)], selector);
+    return new List(domify(selector), selector);
   }
 
   // selector
   if ('string' == typeof selector) {
-    return new List(ctx.querySelectorAll(selector), selector);
+    return new List(Sizzle(selector, ctx), selector);
   }
 }
 
@@ -514,12 +515,11 @@ List.prototype.getStyle = function(prop){
  */
 
 List.prototype.find = function(selector){
-  // TODO: real implementation
   var list = new List([], this.selector);
   var el, els;
   for (var i = 0; i < this.els.length; ++i) {
     el = this.els[i];
-    els = el.querySelectorAll(selector);
+    els = Sizzle(selector, el);
     for (var j = 0; j < els.length; ++j) {
       list.els.push(els[j]);
     }
