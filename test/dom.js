@@ -70,6 +70,39 @@ describe('.append()', function(){
   })
 })
 
+describe('.remove()', function(){
+  it('should return itself for chaining', function(){
+    var list = dom('<div><p></p></div>'),
+    sublist = list.find('p');
+    assert(sublist == sublist.remove());
+  })
+
+  it('should remove the element(s)', function(){
+    var sublist1 = dom('<h1>One</h1>'), sublist2 = dom('<p>Two</p>');
+    var list = dom('<div></div>');
+    list.append(sublist1);
+    list.append(sublist2);
+    assert('<h1>One</h1><p>Two</p>' == list.html());
+    sublist1.remove();
+    assert('<p>Two</p>' == list.html());  
+    sublist2.remove();
+    assert('' == list.html());
+  })
+  
+  it('should accept a selector', function(){
+    var sublist1 = dom('<h1>One</h1>'), sublist2 = dom('<p>Two</p>');
+    var list = dom('<div></div>');
+    list.append(sublist1);
+    list.append(sublist2);
+    assert('<h1>One</h1><p>Two</p>' == list.html());
+    list.remove('h1');
+    assert('<p>Two</p>' == list.html());
+  
+    list.remove('p');
+    assert('' == list.html());
+  })
+})
+
 describe('.length()', function(){
   it('should return the number of elements', function(){
     var list = dom('<em>Hello</em>');

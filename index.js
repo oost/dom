@@ -178,6 +178,24 @@ List.prototype.append = function(val){
 };
 
 /**
+ * Remove `selector`.
+ *
+ * @param {String|Element|List} val
+ * @return {List} self
+ * @api public
+ */
+
+List.prototype.remove = function(selector){
+  var list = this, parent;
+  if (selector) list = list.find(selector);
+  for (var i = 0; i < list.els.length; ++i) {
+    if (list.els[i].parentNode)
+      list.els[i].parentNode.removeChild(list.els[i]);
+  }
+  return this;
+};
+
+/**
  * Return a `List` containing the element at `i`.
  *
  * @param {Number} i
