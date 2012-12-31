@@ -67,6 +67,9 @@ describe('.append()', function(){
 
     list.append(dom('<p>Two</p>'));
     assert('<p>One</p><p>Two</p>' == list.html());
+    
+    list.append('Three');
+    assert('<p>One</p><p>Two</p>Three' == list.html());
   })
 })
 

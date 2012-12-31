@@ -193,9 +193,17 @@ List.prototype.prepend = function(val){
 List.prototype.append = function(val){
   var el = this.els[0];
   if (!el) return this;
-  val = dom(val);
-  for (var i = 0; i < val.els.length; ++i) {
-    el.appendChild(val.els[i]);
+
+  if ('string' == typeof val &&'<' != val.charAt(0)) {
+    el.innerHTML += val;
+  }
+  else  {
+    if (!(val instanceof List ))
+      val = dom(val);
+  
+    for (var i = 0; i < val.els.length; ++i) {
+      el.appendChild(val.els[i]);
+    }       
   }
   return this;
 };
